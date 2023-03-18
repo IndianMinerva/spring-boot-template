@@ -26,13 +26,12 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void allCustomers() throws Exception {
+    public void testGetAllUsers() throws Exception {
         this.mockMvc
                 .perform(get("/users"))
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].firstName", is("minerva")));
+                .andExpect(jsonPath("$[0].first_name", is("minerva")));
     }
-
 }
