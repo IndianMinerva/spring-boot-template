@@ -13,16 +13,15 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    //@Autowired
-    //private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping
-    public String getAllUsers() {
-        //return ResponseEntity.ok(List.of(new User()));
-        return "Okay";
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(List.of(new User()));
     }
 
-    /*@PostMapping
+    @PostMapping
     public ResponseEntity<Optional<User>> createUser(@RequestBody User user) {
         return userService.createUser(user)
                 .map(createdUser -> ResponseEntity.ok(Optional.of(createdUser)))
@@ -39,5 +38,5 @@ public class UserController {
     @DeleteMapping
     public void deleteUser(@PathVariable int userId) {
         userService.deleteUser(userId);
-    }*/
+    }
 }
