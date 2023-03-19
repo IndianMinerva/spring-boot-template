@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class User {
+    private String id;
+
     @JsonProperty("first_name")
     @NotEmpty(message = "First Name is required")
     private String firstName = "minerva";

@@ -3,11 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -21,22 +21,25 @@ public class UserController {
         return ResponseEntity.ok(List.of(new User()));
     }
 
-    @PostMapping
-    public ResponseEntity<Optional<User>> createUser(@RequestBody User user) {
-        return userService.createUser(user)
-                .map(createdUser -> ResponseEntity.ok(Optional.of(createdUser)))
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUser(@PathVariable String userId) {
+        return userService.getUserById(userId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 
-    @PutMapping
-    public ResponseEntity<Optional<User>> updateUser(@PathVariable int userId, @RequestBody User user) {
-        return userService.updateUser(userId, user)
-                .map(updatedUser -> ResponseEntity.ok(Optional.of(updatedUser)))
-                .orElse(ResponseEntity.badRequest().build());
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return ResponseEntity.ok(userService.createUser(user));
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User user) {
+        return ResponseEntity.ok(userService.updateUser(userId, user));
     }
 
     @DeleteMapping
-    public void deleteUser(@PathVariable int userId) {
+    public void deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
     }
 }
