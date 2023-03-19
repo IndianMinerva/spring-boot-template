@@ -6,17 +6,16 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 public class User {
     private String id;
 
     @JsonProperty("first_name")
     @NotEmpty(message = "First Name is required")
-    private String firstName = "minerva";
+    private String firstName;
 
     @JsonProperty("last_name")
     @NotEmpty(message = "Last Name is required")

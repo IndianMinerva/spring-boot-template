@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      host: mongodb
+      port: 27017
+      database: users
+
+management:
+  info:
+    git:
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: "*"
